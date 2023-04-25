@@ -1,0 +1,50 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: "configserver:http://config-server:9091"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/spring-boot-microservices-realm
+  cloud:
+    gateway:
+      routes:
+        # - id: PRODUCT-SERVICE
+        #   uri: lb://PRODUCT-SERVICE
+        #   predicates:
+        #     - Path=/product/**
+        # - id: ORDER-SERVICE
+        #   uri: lb://ORDER-SERVICE
+        #   predicates:
+        #     - Path=/order/**
+        # - id: INVENTORY-SERVICE
+        #   uri: lb://INVENTORY-SERVICE
+        #   predicates:
+        #     - Path=/inventory/**
+        - id: DISCOVERY-SERVER 
+          uri: lb://DISCOVERY-SERVER
+          predicates:
+            - Path=/eureka/web
+          filters:
+            - SetPath=/
+        - id: DISCOVERY-SERVER-STATIC
+          uri: lb://DISCOVERY-SERVER
+          predicates:
+            - Path=/eureka/**
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+        
+logging:
+  level:
+    root: INFO
+
