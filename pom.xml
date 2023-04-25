@@ -4,16 +4,42 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.newyeti</groupId>
-		<artifactId>datahub</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.2</version>
+    <relativePath/>
+  </parent>
 
 	<groupId>com.newyeti.datahub</groupId>
 	<artifactId>api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-gateway</name>
 	<description>API Gateway</description>
+
+	<properties>
+    <java.version>17</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-cloud.version>2022.0.1</spring-cloud.version>
+  </properties>
+
+	<dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>1.16.3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -76,7 +102,7 @@
             <image>sachindramaharjan/jre-alpine-curl:19.0.2_7-jre-alpine</image>
           </from>
           <to>
-            <image>registry.hub.docker.com/sachindramaharjan/datahub-${project.artifactId}</image>
+            <image>registry.hub.docker.com/sachindramaharjan/newyeti-${project.artifactId}</image>
           </to>
 			<container>
 				<environment>
