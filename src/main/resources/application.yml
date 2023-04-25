@@ -47,4 +47,3 @@ management:
 logging:
   level:
     root: INFO
-
