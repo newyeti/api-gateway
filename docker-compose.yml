@@ -44,7 +44,7 @@ services:
       - infra-network
 
   discovery-server:
-    container_name: newyeti-discovery-server
+    container_name: discovery-server
     image: sachindramaharjan/newyeti-discovery-server:latest
     pull_policy: always
     ports:
@@ -53,21 +53,21 @@ services:
       - infra-network
   
   config-server:
-    container_name: newyeti-config-server
+    container_name: config-server
     image: sachindramaharjan/newyeti-config-server:latest
     pull_policy: always
     ports:
       - 9091:9091
     environment:
       - CONFIG_SERVER_GIT_URI=https://github.com/newyeti/configuration.git
-      - EUREKA_SERVICE_URL=http://eureka:password@newyeti-discovery-server:8761/eureka
+      - EUREKA_SERVICE_URL=http://eureka:password@discovery-server:8761/eureka
     depends_on:
       - discovery-server
     networks:
       - infra-network
 
   api-gateway:
-    container_name: newyeti-api-gateway
+    container_name: api-gateway
     image: sachindramaharjan/newyeti-api-gateway:latest
     ports:
       - 8181:8080
@@ -78,6 +78,7 @@ services:
       - CONFIG_SERVER_URI=http://config-server
       - CONFIG_SERVER_PORT=9091
       - CONFIG_SERVER_TIMEOUT=300
+      - SPRING_APPLICATION_JSON={"logging.level.org.springframework.cloud.gateway":"DEBUG","logging.level.org.springframework.boot.autoconfigure.web":"DEBUG"}
     pull_policy: always
     depends_on:
       - discovery-server
