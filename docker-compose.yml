@@ -79,6 +79,7 @@ services:
       - CONFIG_SERVER_PORT=9091
       - CONFIG_SERVER_TIMEOUT=300
       - SPRING_APPLICATION_JSON={"logging.level.org.springframework.cloud.gateway":"DEBUG","logging.level.org.springframework.boot.autoconfigure.web":"DEBUG"}
+      - DISCOVERY_SERVER_HOSTNAME=${DISCOVERY_SERVER_HOSTNAME}
     pull_policy: always
     depends_on:
       - discovery-server

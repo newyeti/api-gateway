@@ -14,3 +14,10 @@ build-image-local:
 #Build image and push to registry
 build-local:
 	mvn clean compile jib:build
+
+# Docker compose commands
+up:
+	docker compose up -d 
+
+down:
+	docker compose down
