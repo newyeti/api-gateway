@@ -8,8 +8,14 @@ tasks:
   - init: make build-image
     env:
       M2_HOME: maven-settings.xml
+  
+  - name: Add environment variables
+    env:
       EUREKA_USERNAME: eureka
       EUREKA_PASSWORD: password
+    command: 
+      export DISCOVERY_SERVER_HOSTNAME=8761-${HOSTNAME}.${GITPOD_WORKSPACE_CLUSTER_HOST}
+
 image:
   file: .gitpod.Dockerfile
 

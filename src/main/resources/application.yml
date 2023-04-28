@@ -14,13 +14,13 @@ spring:
     gateway:
       routes:
         - id: DISCOVERY-SERVER 
-          uri: http://discovery-server:8761
+          uri: ${DISCOVERY_SERVER_HOSTNAME}
           predicates:
             - Path=/eureka/web
           filters:
             - SetPath=/
         - id: DISCOVERY-SERVER-STATIC
-          uri: http://discovery-server:8761
+          uri: ${DISCOVERY_SERVER_HOSTNAME}
           predicates:
             - Path=/eureka/**
 
