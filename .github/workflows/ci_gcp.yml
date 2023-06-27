@@ -50,12 +50,12 @@ jobs:
       env:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       run: |-
-        bash ./git/scripts/git_version.sh
+        bash ./scripts/git/git_version.sh
         
     - name: Automatic Tagging of Releases
       id: increment-git-tag
       run: |
-        bash ./git/scripts/git_update.sh -v $GIT_TAG_TYPE
+        bash ./scripts/git/git_update.sh -v $GIT_TAG_TYPE
     
     - name: Configure Docker Client
       run: |-
